@@ -9,69 +9,69 @@ import Link from 'next/link';
 export default function DashboardPage() {
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-stone-50">
+      <div className="min-h-screen bg-gradient-to-b from-orange-50 via-white to-purple-50/30">
         <Navigation />
-        <main className="container mx-auto px-4 py-8">
-          <div className="space-y-8">
+        <main className="container mx-auto px-4 py-12">
+          <div className="space-y-10">
             {/* Header */}
-            <div>
-              <h1 className="text-3xl font-bold text-stone-900">Dashboard</h1>
-              <p className="text-stone-600 mt-2">
-                Welcome to Invoice Parser - Your document management hub
+            <div className="space-y-3">
+              <h1 className="text-4xl font-bold text-primary">Dashboard</h1>
+              <p className="text-foreground/70 text-lg">
+                Welcome to Invoice Parser — your elegant document management hub
               </p>
             </div>
 
             {/* Statistics Cards */}
             <div className="grid gap-6 md:grid-cols-3">
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardDescription>Total Invoices</CardDescription>
-                  <CardTitle className="text-4xl">-</CardTitle>
+              <Card className="border-muted/40 hover:shadow-xl">
+                <CardHeader className="pb-4">
+                  <CardDescription className="text-foreground/60 font-medium">Total Invoices</CardDescription>
+                  <CardTitle className="text-5xl font-bold text-primary">-</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-xs text-stone-600">
-                    Search by vendor to view invoices
+                  <p className="text-sm text-foreground/60">
+                    Search by vendor to discover invoices
                   </p>
                 </CardContent>
               </Card>
 
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardDescription>Recent Uploads</CardDescription>
-                  <CardTitle className="text-4xl">-</CardTitle>
+              <Card className="border-muted/40 hover:shadow-xl">
+                <CardHeader className="pb-4">
+                  <CardDescription className="text-foreground/60 font-medium">Recent Uploads</CardDescription>
+                  <CardTitle className="text-5xl font-bold text-secondary">-</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-xs text-stone-600">
-                    Upload invoices to get started
+                  <p className="text-sm text-foreground/60">
+                    Start uploading to get going
                   </p>
                 </CardContent>
               </Card>
 
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardDescription>Processing Status</CardDescription>
-                  <CardTitle className="text-4xl">Ready</CardTitle>
+              <Card className="border-muted/40 hover:shadow-xl">
+                <CardHeader className="pb-4">
+                  <CardDescription className="text-foreground/60 font-medium">Processing Status</CardDescription>
+                  <CardTitle className="text-5xl font-bold text-accent">Ready</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-xs text-stone-600">
-                    System is ready to process invoices
+                  <p className="text-sm text-foreground/60">
+                    System is prepared for action
                   </p>
                 </CardContent>
               </Card>
             </div>
 
             {/* Quick Actions */}
-            <Card>
+            <Card className="border-muted/40">
               <CardHeader>
-                <CardTitle>Quick Actions</CardTitle>
+                <CardTitle className="text-2xl text-primary">Quick Actions</CardTitle>
                 <CardDescription>
-                  Get started with common tasks
+                  Start with these common tasks
                 </CardDescription>
               </CardHeader>
               <CardContent className="grid gap-4 md:grid-cols-2">
                 <Link href="/upload">
-                  <Button className="w-full h-24 text-lg" size="lg">
-                    <div className="flex flex-col items-center gap-2">
+                  <Button className="w-full h-28 text-base rounded-xl hover:scale-105 transition-transform" size="lg">
+                    <div className="flex flex-col items-center gap-3">
                       <svg
                         className="w-8 h-8"
                         fill="none"
@@ -93,10 +93,10 @@ export default function DashboardPage() {
                 <Link href="/invoices">
                   <Button
                     variant="outline"
-                    className="w-full h-24 text-lg"
+                    className="w-full h-28 text-base rounded-xl border-muted/40 hover:scale-105 transition-transform"
                     size="lg"
                   >
-                    <div className="flex flex-col items-center gap-2">
+                    <div className="flex flex-col items-center gap-3">
                       <svg
                         className="w-8 h-8"
                         fill="none"
@@ -118,22 +118,22 @@ export default function DashboardPage() {
             </Card>
 
             {/* Getting Started */}
-            <Card>
+            <Card className="border-muted/40">
               <CardHeader>
-                <CardTitle>Getting Started</CardTitle>
+                <CardTitle className="text-2xl text-primary">Getting Started</CardTitle>
                 <CardDescription>
-                  Learn how to use the Invoice Parser system
+                  Learn how to use Invoice Parser
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-3">
                 <Link href="/upload">
-                  <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-stone-100 transition-colors cursor-pointer group">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-stone-900 text-white text-sm font-bold group-hover:bg-stone-700">
+                  <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-muted/30 transition-all duration-200 cursor-pointer group border border-transparent hover:border-muted/40">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-orange-400 text-white text-sm font-bold group-hover:shadow-md transition-all">
                       1
                     </div>
                     <div>
-                      <h3 className="font-semibold group-hover:text-stone-900">Upload an Invoice</h3>
-                      <p className="text-sm text-stone-600">
+                      <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">Upload an Invoice</h3>
+                      <p className="text-sm text-foreground/60 mt-1">
                         Upload PDF or image files containing invoice data. The system will automatically extract key information.
                       </p>
                     </div>
@@ -141,13 +141,13 @@ export default function DashboardPage() {
                 </Link>
                 
                 <Link href="/invoices">
-                  <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-stone-100 transition-colors cursor-pointer group">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-stone-900 text-white text-sm font-bold group-hover:bg-stone-700">
+                  <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-muted/30 transition-all duration-200 cursor-pointer group border border-transparent hover:border-muted/40">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-secondary to-emerald-400 text-white text-sm font-bold group-hover:shadow-md transition-all">
                       2
                     </div>
                     <div>
-                      <h3 className="font-semibold group-hover:text-stone-900">Search by Vendor</h3>
-                      <p className="text-sm text-stone-600">
+                      <h3 className="font-semibold text-foreground group-hover:text-secondary transition-colors">Search by Vendor</h3>
+                      <p className="text-sm text-foreground/60 mt-1">
                         Use the Invoices page to search for invoices by vendor name and view detailed information.
                       </p>
                     </div>
@@ -155,13 +155,13 @@ export default function DashboardPage() {
                 </Link>
                 
                 <Link href="/invoices">
-                  <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-stone-100 transition-colors cursor-pointer group">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-stone-900 text-white text-sm font-bold group-hover:bg-stone-700">
+                  <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-muted/30 transition-all duration-200 cursor-pointer group border border-transparent hover:border-muted/40">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent to-lavender-400 text-foreground text-sm font-bold group-hover:shadow-md transition-all">
                       3
                     </div>
                     <div>
-                      <h3 className="font-semibold group-hover:text-stone-900">Review and Edit</h3>
-                      <p className="text-sm text-stone-600">
+                      <h3 className="font-semibold text-foreground group-hover:text-accent transition-colors">Review and Edit</h3>
+                      <p className="text-sm text-foreground/60 mt-1">
                         Click on any invoice to view details and make necessary edits to the extracted data.
                       </p>
                     </div>

@@ -36,18 +36,25 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-stone-50 px-4">
-      <Card className="w-full max-w-md">
-          <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">Invoice Parser</CardTitle>
-          <CardDescription>
-            Enter your credentials to access the system
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-orange-50 via-pink-50 to-purple-50 px-4">
+      <Card className="w-full max-w-md border-muted/40">
+          <CardHeader className="space-y-3 pb-8">
+          <div className="flex justify-center mb-2">
+            <div className="h-12 w-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+          </div>
+          <CardTitle className="text-3xl font-bold text-center text-primary">Invoice Parser</CardTitle>
+          <CardDescription className="text-center text-base">
+            Welcome back. Enter your credentials to continue.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-2">
-              <Label htmlFor="username">Username</Label>
+              <Label htmlFor="username" className="text-foreground font-medium">Username</Label>
               <Input
                 id="username"
                 type="text"
@@ -56,10 +63,11 @@ export default function LoginPage() {
                 onChange={(e) => setUsername(e.target.value)}
                 required
                 disabled={isLoading}
+                className="bg-muted/20 border-muted/40"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" className="text-foreground font-medium">Password</Label>
               <Input
                 id="password"
                 type="password"
@@ -68,13 +76,14 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 disabled={isLoading}
+                className="bg-muted/20 border-muted/40"
               />
             </div>
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit" className="w-full mt-6" disabled={isLoading} size="lg">
               {isLoading ? 'Logging in...' : 'Login'}
             </Button>
-            <p className="text-xs text-center text-stone-500 mt-4">
-              Demo credentials: admin / admin
+            <p className="text-xs text-center text-muted-foreground mt-6 bg-muted/20 rounded-xl py-3">
+              Demo credentials: <span className="font-semibold text-foreground">admin</span> / <span className="font-semibold text-foreground">admin</span>
             </p>
           </form>
         </CardContent>

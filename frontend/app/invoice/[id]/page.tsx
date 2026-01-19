@@ -105,26 +105,26 @@ export default function InvoiceDetailsPage() {
   const getStatusColor = (status: string) => {
     switch (status?.toLowerCase()) {
       case 'paid':
-        return 'bg-green-100 text-green-800';
+        return 'bg-emerald-100 text-emerald-800 border-emerald-200';
       case 'pending':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-amber-100 text-amber-800 border-amber-200';
       case 'overdue':
-        return 'bg-red-100 text-red-800';
+        return 'bg-rose-100 text-rose-800 border-rose-200';
       default:
-        return 'bg-stone-100 text-stone-800';
+        return 'bg-slate-100 text-slate-800 border-slate-200';
     }
   };
 
   if (isLoading) {
     return (
       <ProtectedRoute>
-        <div className="min-h-screen bg-stone-50">
+        <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-purple-50/30">
           <Navigation />
-          <main className="container mx-auto px-4 py-8">
+          <main className="container mx-auto px-4 py-12">
             <div className="flex items-center justify-center h-64">
               <div className="text-center">
                 <svg
-                  className="animate-spin h-12 w-12 mx-auto text-stone-900"
+                  className="animate-spin h-12 w-12 mx-auto text-primary"
                   fill="none"
                   viewBox="0 0 24 24"
                 >
@@ -142,7 +142,7 @@ export default function InvoiceDetailsPage() {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   />
                 </svg>
-                <p className="mt-4 text-stone-600">Loading invoice...</p>
+                <p className="mt-4 text-foreground/70">Loading invoice...</p>
               </div>
             </div>
           </main>
@@ -154,15 +154,15 @@ export default function InvoiceDetailsPage() {
   if (!invoice || !editedInvoice) {
     return (
       <ProtectedRoute>
-        <div className="min-h-screen bg-stone-50">
+        <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-purple-50/30">
           <Navigation />
-          <main className="container mx-auto px-4 py-8">
-            <div className="text-center py-12">
-              <h2 className="text-2xl font-bold text-stone-900">Invoice Not Found</h2>
-              <p className="mt-2 text-stone-600">
+          <main className="container mx-auto px-4 py-12">
+            <div className="text-center py-16">
+              <h2 className="text-3xl font-bold text-primary">Invoice Not Found</h2>
+              <p className="mt-3 text-foreground/70 text-lg">
                 The invoice you're looking for doesn't exist or couldn't be loaded.
               </p>
-              <Button onClick={() => router.push('/invoices')} className="mt-4">
+              <Button onClick={() => router.push('/invoices')} className="mt-6" size="lg">
                 Back to Invoices
               </Button>
             </div>
@@ -174,10 +174,10 @@ export default function InvoiceDetailsPage() {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-stone-50">
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-purple-50/30">
         <Navigation />
-        <main className="container mx-auto px-4 py-8">
-          <div className="max-w-5xl mx-auto space-y-6">
+        <main className="container mx-auto px-4 py-12">
+          <div className="max-w-5xl mx-auto space-y-8">
             {/* Header */}
             <div className="flex items-center justify-between">
               <div>
@@ -185,18 +185,18 @@ export default function InvoiceDetailsPage() {
                   variant="ghost"
                   size="sm"
                   onClick={() => router.push('/invoices')}
-                  className="mb-2"
+                  className="mb-3"
                 >
                   ← Back to Invoices
                 </Button>
-                <h1 className="text-3xl font-bold text-stone-900">Invoice Details</h1>
-                <p className="text-stone-600 mt-1">
-                  Invoice ID: {invoice.invoiceId}
+                <h1 className="text-4xl font-bold text-primary">Invoice Details</h1>
+                <p className="text-foreground/70 mt-2">
+                  Invoice ID: <span className="font-semibold text-foreground">{invoice.invoiceId}</span>
                 </p>
               </div>
               <div className="flex gap-2">
                 {!isEditing ? (
-                  <Button onClick={handleEdit}>Edit Invoice</Button>
+                  <Button onClick={handleEdit} size="lg">Edit Invoice</Button>
                 ) : (
                   <>
                     <Button variant="outline" onClick={handleCancel}>
@@ -209,18 +209,18 @@ export default function InvoiceDetailsPage() {
             </div>
 
             {/* Basic Information */}
-            <Card>
+            <Card className="border-muted/40">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
-                    <CardTitle>Basic Information</CardTitle>
+                    <CardTitle className="text-2xl text-primary">Basic Information</CardTitle>
                     <CardDescription>
                       Core invoice details and identification
                     </CardDescription>
                   </div>
                   <Badge
                     variant="secondary"
-                    className={getStatusColor(editedInvoice.status)}
+                    className={`${getStatusColor(editedInvoice.status)} border`}
                   >
                     {editedInvoice.status || 'Unknown'}
                   </Badge>
@@ -228,7 +228,7 @@ export default function InvoiceDetailsPage() {
               </CardHeader>
               <CardContent className="grid gap-6 md:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="invoiceNumber">Invoice Number</Label>
+                  <Label htmlFor="invoiceNumber" className="font-medium">Invoice Number</Label>
                   {isEditing ? (
                     <Input
                       id="invoiceNumber"
@@ -236,16 +236,17 @@ export default function InvoiceDetailsPage() {
                       onChange={(e) =>
                         handleInputChange('invoiceNumber', e.target.value)
                       }
+                      className="bg-muted/20 border-muted/40"
                     />
                   ) : (
-                    <p className="text-lg font-medium">
+                    <p className="text-lg font-medium text-foreground">
                       {invoice.invoiceNumber || 'N/A'}
                     </p>
                   )}
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="vendorName">Vendor Name</Label>
+                  <Label htmlFor="vendorName" className="font-medium">Vendor Name</Label>
                   {isEditing ? (
                     <Input
                       id="vendorName"
@@ -253,14 +254,15 @@ export default function InvoiceDetailsPage() {
                       onChange={(e) =>
                         handleInputChange('vendorName', e.target.value)
                       }
+                      className="bg-muted/20 border-muted/40"
                     />
                   ) : (
-                    <p className="text-lg font-medium">{invoice.vendorName}</p>
+                    <p className="text-lg font-medium text-primary">{invoice.vendorName}</p>
                   )}
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="invoiceDate">Invoice Date</Label>
+                  <Label htmlFor="invoiceDate" className="font-medium">Invoice Date</Label>
                   {isEditing ? (
                     <Input
                       id="invoiceDate"
@@ -269,67 +271,71 @@ export default function InvoiceDetailsPage() {
                       onChange={(e) =>
                         handleInputChange('invoiceDate', e.target.value)
                       }
+                      className="bg-muted/20 border-muted/40"
                     />
                   ) : (
-                    <p className="text-lg font-medium">
+                    <p className="text-lg font-medium text-foreground">
                       {formatDisplayDate(invoice.invoiceDate)}
                     </p>
                   )}
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="dueDate">Due Date</Label>
+                  <Label htmlFor="dueDate" className="font-medium">Due Date</Label>
                   {isEditing ? (
                     <Input
                       id="dueDate"
                       type="date"
                       value={formatDate(editedInvoice.dueDate)}
                       onChange={(e) => handleInputChange('dueDate', e.target.value)}
+                      className="bg-muted/20 border-muted/40"
                     />
                   ) : (
-                    <p className="text-lg font-medium">
+                    <p className="text-lg font-medium text-foreground">
                       {formatDisplayDate(invoice.dueDate)}
                     </p>
                   )}
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="status">Status</Label>
+                  <Label htmlFor="status" className="font-medium">Status</Label>
                   {isEditing ? (
                     <Input
                       id="status"
                       value={editedInvoice.status || ''}
                       onChange={(e) => handleInputChange('status', e.target.value)}
+                      className="bg-muted/20 border-muted/40"
                     />
                   ) : (
-                    <p className="text-lg font-medium">{invoice.status || 'N/A'}</p>
+                    <p className="text-lg font-medium text-foreground">{invoice.status || 'N/A'}</p>
                   )}
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="currency">Currency</Label>
+                  <Label htmlFor="currency" className="font-medium">Currency</Label>
                   {isEditing ? (
                     <Input
                       id="currency"
                       value={editedInvoice.currency || 'USD'}
                       onChange={(e) => handleInputChange('currency', e.target.value)}
+                      className="bg-muted/20 border-muted/40"
                     />
                   ) : (
-                    <p className="text-lg font-medium">{invoice.currency || 'USD'}</p>
+                    <p className="text-lg font-medium text-foreground">{invoice.currency || 'USD'}</p>
                   )}
                 </div>
               </CardContent>
             </Card>
 
             {/* Financial Details */}
-            <Card>
+            <Card className="border-muted/40">
               <CardHeader>
-                <CardTitle>Financial Details</CardTitle>
+                <CardTitle className="text-2xl text-primary">Financial Details</CardTitle>
                 <CardDescription>Amount breakdown and totals</CardDescription>
               </CardHeader>
               <CardContent className="grid gap-6 md:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="subtotal">Subtotal</Label>
+                  <Label htmlFor="subtotal" className="font-medium">Subtotal</Label>
                   {isEditing ? (
                     <Input
                       id="subtotal"
@@ -339,9 +345,10 @@ export default function InvoiceDetailsPage() {
                       onChange={(e) =>
                         handleInputChange('subtotal', parseFloat(e.target.value))
                       }
+                      className="bg-muted/20 border-muted/40"
                     />
                   ) : (
-                    <p className="text-lg font-medium">
+                    <p className="text-lg font-medium text-foreground">
                       {invoice.subtotal
                         ? formatCurrency(invoice.subtotal, invoice.currency)
                         : 'N/A'}
@@ -350,7 +357,7 @@ export default function InvoiceDetailsPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="taxAmount">Tax Amount</Label>
+                  <Label htmlFor="taxAmount" className="font-medium">Tax Amount</Label>
                   {isEditing ? (
                     <Input
                       id="taxAmount"
@@ -360,9 +367,10 @@ export default function InvoiceDetailsPage() {
                       onChange={(e) =>
                         handleInputChange('taxAmount', parseFloat(e.target.value))
                       }
+                      className="bg-muted/20 border-muted/40"
                     />
                   ) : (
-                    <p className="text-lg font-medium">
+                    <p className="text-lg font-medium text-foreground">
                       {invoice.taxAmount
                         ? formatCurrency(invoice.taxAmount, invoice.currency)
                         : 'N/A'}
@@ -371,7 +379,7 @@ export default function InvoiceDetailsPage() {
                 </div>
 
                 <div className="space-y-2 md:col-span-2">
-                  <Label htmlFor="totalAmount">Total Amount</Label>
+                  <Label htmlFor="totalAmount" className="font-medium">Total Amount</Label>
                   {isEditing ? (
                     <Input
                       id="totalAmount"
@@ -381,10 +389,10 @@ export default function InvoiceDetailsPage() {
                       onChange={(e) =>
                         handleInputChange('totalAmount', parseFloat(e.target.value))
                       }
-                      className="text-xl font-bold"
+                      className="bg-muted/20 border-muted/40 text-xl font-bold"
                     />
                   ) : (
-                    <p className="text-2xl font-bold text-stone-900">
+                    <p className="text-2xl font-bold text-primary">
                       {formatCurrency(invoice.totalAmount, invoice.currency)}
                     </p>
                   )}
@@ -394,9 +402,9 @@ export default function InvoiceDetailsPage() {
 
             {/* Addresses */}
             <div className="grid gap-6 md:grid-cols-2">
-              <Card>
+              <Card className="border-muted/40">
                 <CardHeader>
-                  <CardTitle>Billing Address</CardTitle>
+                  <CardTitle className="text-primary">Billing Address</CardTitle>
                 </CardHeader>
                 <CardContent>
                   {isEditing ? (
@@ -405,18 +413,19 @@ export default function InvoiceDetailsPage() {
                       onChange={(e) =>
                         handleInputChange('billingAddress', e.target.value)
                       }
+                      className="bg-muted/20 border-muted/40"
                     />
                   ) : (
-                    <p className="text-sm text-stone-700 whitespace-pre-line">
+                    <p className="text-sm text-foreground/70 whitespace-pre-line">
                       {invoice.billingAddress || 'Not provided'}
                     </p>
                   )}
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-muted/40">
                 <CardHeader>
-                  <CardTitle>Shipping Address</CardTitle>
+                  <CardTitle className="text-secondary">Shipping Address</CardTitle>
                 </CardHeader>
                 <CardContent>
                   {isEditing ? (
@@ -425,9 +434,10 @@ export default function InvoiceDetailsPage() {
                       onChange={(e) =>
                         handleInputChange('shippingAddress', e.target.value)
                       }
+                      className="bg-muted/20 border-muted/40"
                     />
                   ) : (
-                    <p className="text-sm text-stone-700 whitespace-pre-line">
+                    <p className="text-sm text-foreground/70 whitespace-pre-line">
                       {invoice.shippingAddress || 'Not provided'}
                     </p>
                   )}
@@ -437,9 +447,9 @@ export default function InvoiceDetailsPage() {
 
             {/* Line Items */}
             {invoice.items && invoice.items.length > 0 && (
-              <Card>
+              <Card className="border-muted/40">
                 <CardHeader>
-                  <CardTitle>Line Items</CardTitle>
+                  <CardTitle className="text-2xl text-primary">Line Items</CardTitle>
                   <CardDescription>
                     Itemized list of products or services
                   </CardDescription>

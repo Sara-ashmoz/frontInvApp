@@ -112,37 +112,37 @@ export default function UploadPage() {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-stone-50">
+      <div className="min-h-screen bg-gradient-to-b from-pink-50 via-white to-orange-50/30">
         <Navigation />
-        <main className="container mx-auto px-4 py-8">
-          <div className="max-w-3xl mx-auto space-y-6">
+        <main className="container mx-auto px-4 py-12">
+          <div className="max-w-3xl mx-auto space-y-8">
             {/* Header */}
-            <div>
-              <h1 className="text-3xl font-bold text-stone-900">Upload Invoice</h1>
-              <p className="text-stone-600 mt-2">
-                Upload PDF or image files for automatic invoice extraction
+            <div className="space-y-3">
+              <h1 className="text-4xl font-bold text-primary">Upload Invoice</h1>
+              <p className="text-foreground/70 text-lg">
+                Upload PDF or image files for intelligent invoice extraction
               </p>
             </div>
 
             {/* Upload Card */}
-            <Card>
+            <Card className="border-muted/40">
               <CardHeader>
-                <CardTitle>Select File</CardTitle>
+                <CardTitle className="text-2xl text-primary">Select File</CardTitle>
                 <CardDescription>
                   Drag and drop or click to select an invoice file
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-6">
                 {/* Drop Zone */}
                 <div
                   onDragOver={handleDragOver}
                   onDragLeave={handleDragLeave}
                   onDrop={handleDrop}
                   onClick={() => fileInputRef.current?.click()}
-                  className={`border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition-colors ${
+                  className={`border-2 border-dashed rounded-2xl p-16 text-center cursor-pointer transition-all duration-300 ${
                     isDragging
-                      ? 'border-stone-900 bg-stone-100'
-                      : 'border-stone-300 hover:border-stone-400 hover:bg-stone-50'
+                      ? 'border-primary bg-gradient-to-br from-primary/5 to-secondary/5 scale-105'
+                      : 'border-muted/40 hover:border-primary/50 hover:bg-gradient-to-br hover:from-primary/3 hover:to-secondary/3'
                   }`}
                 >
                   <input
@@ -152,38 +152,51 @@ export default function UploadPage() {
                     onChange={handleFileSelect}
                     className="hidden"
                   />
-                  <div className="flex flex-col items-center gap-2">
-                    <svg
-                      className="w-12 h-12 text-stone-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                      />
-                    </svg>
-                    <p className="text-lg font-medium text-stone-700">
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="p-3 rounded-full bg-primary/10">
+                      <svg
+                        className="w-12 h-12 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                        />
+                      </svg>
+                    </div>
+                    <p className="text-lg font-semibold text-foreground">
                       {file ? file.name : 'Drop your file here or click to browse'}
                     </p>
-                    <p className="text-sm text-stone-500">
-                      Supported formats: PDF, JPG, PNG, GIF (max 10MB)
+                    <p className="text-sm text-foreground/60">
+                      Supported: PDF, JPG, PNG, GIF (max 10MB)
                     </p>
                   </div>
                 </div>
 
                 {/* File Info */}
                 {file && (
-                  <div className="bg-stone-100 rounded-lg p-4">
+                  <div className="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-xl p-4 border border-muted/40">
                     <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium text-stone-900">{file.name}</p>
-                        <p className="text-sm text-stone-600">
-                          {(file.size / 1024).toFixed(2)} KB
-                        </p>
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 rounded-lg bg-primary/10">
+                          <svg
+                            className="w-5 h-5 text-primary"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <p className="font-semibold text-foreground">{file.name}</p>
+                          <p className="text-sm text-foreground/60">
+                            {(file.size / 1024).toFixed(2)} KB
+                          </p>
+                        </div>
                       </div>
                       <Button
                         variant="ghost"
@@ -198,7 +211,7 @@ export default function UploadPage() {
                 )}
 
                 {/* Action Buttons */}
-                <div className="flex gap-3">
+                <div className="flex gap-3 pt-2">
                   <Button
                     onClick={handleUpload}
                     disabled={!file || isUploading}
@@ -237,6 +250,7 @@ export default function UploadPage() {
                     onClick={handleReset}
                     disabled={!file || isUploading}
                     size="lg"
+                    className="border-muted/40"
                   >
                     Clear
                   </Button>
@@ -245,34 +259,49 @@ export default function UploadPage() {
             </Card>
 
             {/* Instructions */}
-            <Card>
+            <Card className="border-muted/40">
               <CardHeader>
-                <CardTitle>Instructions</CardTitle>
+                <CardTitle className="text-2xl text-primary">How It Works</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex gap-3">
-                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-stone-900 text-white text-xs font-bold">
+              <CardContent className="space-y-4">
+                <div className="flex gap-4 p-4 rounded-xl bg-muted/10 border border-muted/20 hover:border-primary/30 transition-colors">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-orange-400 text-white text-sm font-bold">
                     1
                   </div>
-                  <p className="text-sm text-stone-700">
-                    Select a clear, readable invoice document in PDF or image format
-                  </p>
+                  <div>
+                    <p className="font-semibold text-foreground">
+                      Select a Clear Invoice
+                    </p>
+                    <p className="text-sm text-foreground/60 mt-1">
+                      Choose a clear, readable invoice document in PDF or image format
+                    </p>
+                  </div>
                 </div>
-                <div className="flex gap-3">
-                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-stone-900 text-white text-xs font-bold">
+                <div className="flex gap-4 p-4 rounded-xl bg-muted/10 border border-muted/20 hover:border-secondary/30 transition-colors">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-secondary to-emerald-400 text-white text-sm font-bold">
                     2
                   </div>
-                  <p className="text-sm text-stone-700">
-                    Click "Upload & Extract" to send the file to the processing backend
-                  </p>
+                  <div>
+                    <p className="font-semibold text-foreground">
+                      Upload & Process
+                    </p>
+                    <p className="text-sm text-foreground/60 mt-1">
+                      Click "Upload & Extract" to send the file to our intelligent processing backend
+                    </p>
+                  </div>
                 </div>
-                <div className="flex gap-3">
-                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-stone-900 text-white text-xs font-bold">
+                <div className="flex gap-4 p-4 rounded-xl bg-muted/10 border border-muted/20 hover:border-accent/30 transition-colors">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent to-lavender-400 text-foreground text-sm font-bold">
                     3
                   </div>
-                  <p className="text-sm text-stone-700">
-                    Review the extracted invoice data and make any necessary corrections
-                  </p>
+                  <div>
+                    <p className="font-semibold text-foreground">
+                      Review & Refine
+                    </p>
+                    <p className="text-sm text-foreground/60 mt-1">
+                      Review the extracted invoice data and make any necessary refinements
+                    </p>
+                  </div>
                 </div>
               </CardContent>
             </Card>

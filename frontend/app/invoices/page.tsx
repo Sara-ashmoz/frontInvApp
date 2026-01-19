@@ -206,54 +206,55 @@ export default function InvoicesPage() {
   const getStatusColor = (status: string) => {
     switch (status?.toLowerCase()) {
       case 'paid':
-        return 'bg-green-100 text-green-800';
+        return 'bg-emerald-100 text-emerald-800 border-emerald-200';
       case 'pending':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-amber-100 text-amber-800 border-amber-200';
       case 'overdue':
-        return 'bg-red-100 text-red-800';
+        return 'bg-rose-100 text-rose-800 border-rose-200';
       default:
-        return 'bg-stone-100 text-stone-800';
+        return 'bg-slate-100 text-slate-800 border-slate-200';
     }
   };
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-stone-50">
+      <div className="min-h-screen bg-gradient-to-b from-purple-50 via-white to-pink-50/30">
         <Navigation />
-        <main className="container mx-auto px-4 py-8">
-          <div className="space-y-6">
+        <main className="container mx-auto px-4 py-12">
+          <div className="space-y-8">
             {/* Header */}
-            <div>
-              <h1 className="text-3xl font-bold text-stone-900">Invoices</h1>
-              <p className="text-stone-600 mt-2">
-                Search and manage invoices by vendor
+            <div className="space-y-3">
+              <h1 className="text-4xl font-bold text-primary">Invoices</h1>
+              <p className="text-foreground/70 text-lg">
+                Search and manage your invoices by vendor or ID
               </p>
             </div>
 
             {/* Search Cards */}
             <div className="grid gap-6 md:grid-cols-2">
               {/* Search by Vendor */}
-              <Card>
+              <Card className="border-muted/40">
                 <CardHeader>
-                  <CardTitle>Search by Vendor</CardTitle>
+                  <CardTitle className="text-primary">Search by Vendor</CardTitle>
                   <CardDescription>
-                    Enter a vendor name to retrieve associated invoices
+                    Enter a vendor name to find associated invoices
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSearchByVendor} className="space-y-4">
                     <div>
-                      <Label htmlFor="vendorName">Vendor Name</Label>
+                      <Label htmlFor="vendorName" className="font-medium">Vendor Name</Label>
                       <Input
                         id="vendorName"
                         type="text"
-                        placeholder="Enter vendor name..."
+                        placeholder="e.g., Acme Corp"
                         value={vendorName}
                         onChange={(e) => setVendorName(e.target.value)}
                         disabled={isLoading}
+                        className="bg-muted/20 border-muted/40 mt-1"
                       />
                     </div>
-                    <Button type="submit" disabled={isLoading} className="w-full">
+                    <Button type="submit" disabled={isLoading} className="w-full" size="lg">
                       {isLoading && searchType === 'vendor' ? 'Searching...' : 'Search by Vendor'}
                     </Button>
                   </form>
@@ -261,27 +262,28 @@ export default function InvoicesPage() {
               </Card>
 
               {/* Search by Invoice ID */}
-              <Card>
+              <Card className="border-muted/40">
                 <CardHeader>
-                  <CardTitle>Search by Invoice ID</CardTitle>
+                  <CardTitle className="text-secondary">Search by Invoice ID</CardTitle>
                   <CardDescription>
-                    Enter an invoice ID to view specific invoice
+                    Enter an invoice ID to view specific details
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSearchById} className="space-y-4">
                     <div>
-                      <Label htmlFor="invoiceId">Invoice ID</Label>
+                      <Label htmlFor="invoiceId" className="font-medium">Invoice ID</Label>
                       <Input
                         id="invoiceId"
                         type="text"
-                        placeholder="Enter invoice ID..."
+                        placeholder="e.g., INV-12345"
                         value={invoiceId}
                         onChange={(e) => setInvoiceId(e.target.value)}
                         disabled={isLoading}
+                        className="bg-muted/20 border-muted/40 mt-1"
                       />
                     </div>
-                    <Button type="submit" disabled={isLoading} className="w-full">
+                    <Button type="submit" disabled={isLoading} className="w-full" size="lg">
                       {isLoading && searchType === 'id' ? 'Searching...' : 'Search by ID'}
                     </Button>
                   </form>
@@ -291,7 +293,7 @@ export default function InvoicesPage() {
 
             {/* Results */}
             {hasSearched && (
-              <Card>
+              <Card className="border-muted/40">
                 <CardHeader>
                   <CardTitle>Search Results</CardTitle>
                   <CardDescription>

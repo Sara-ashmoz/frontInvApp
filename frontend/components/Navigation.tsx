@@ -22,22 +22,22 @@ export default function Navigation() {
   ];
 
   return (
-    <nav className="border-b bg-white">
+    <nav className="border-b border-muted/20 bg-white shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center space-x-8">
-            <Link href="/dashboard" className="text-xl font-bold text-stone-900">
+            <Link href="/dashboard" className="text-xl font-bold text-primary hover:text-primary/80 transition-colors">
               Invoice Parser
             </Link>
-            <div className="hidden md:flex space-x-4">
+            <div className="hidden md:flex space-x-2">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     pathname === item.href
-                      ? 'bg-stone-100 text-stone-900'
-                      : 'text-stone-600 hover:bg-stone-50 hover:text-stone-900'
+                      ? 'bg-primary text-primary-foreground shadow-md'
+                      : 'text-foreground hover:bg-muted/30 hover:shadow-sm'
                   }`}
                 >
                   {item.label}
