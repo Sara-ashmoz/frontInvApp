@@ -53,8 +53,8 @@ jobs:
         playwright install --with-deps
         
     - name: Run Playwright tests
-      env:
-        HEADLESS: true
-        BASE_URL: https://sapindaceous-chagrinedly-camilla.ngrok-free.dev
+      # env:
+        # HEADLESS: true
+        # BASE_URL: https://sapindaceous-chagrinedly-camilla.ngrok-free.dev
       run: |
         pytest test/ -v
