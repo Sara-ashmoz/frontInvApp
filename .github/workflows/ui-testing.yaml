@@ -6,37 +6,27 @@ on:
     branches:
      - main
 
-  workflow_dispatch:
-    inputs:
-      browser:
-        description: 'Browser to run tests on'
-        required: true
-        default: 'chrome'
-        type: choice
-        options:
-        - chrome
-        - firefox
-      resolution:
-        description: 'Screen resolution'
-        required: true
-        default: 'desktop'
-        type: choice
-        options:
-        - desktop
-        - tablet
-        - mobile  
-  
-
 jobs:
-  playwright-tests:
+  playwright-matrix-tests:
     runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        browser: [chrome, firefox]
+        resolution: 
+          - { name: 'desktop', width: 1920, height: 1080 }
+          - { name: 'tablet', width: 768, height: 1024 }
+          - { name: 'mobile', width: 375, height: 667 }
+      fail-fast: false  # Continue other jobs even if one fails
+    
+    name: Test ${{ matrix.browser }} - ${{ matrix.resolution.name }}
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
       with:
-        fetch-depth: 1  
-        repository: Sara-ashmoz/frontInvApp 
+        fetch-depth: 1
+        repository: Sara-ashmoz/frontInvApp  
       
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -50,11 +40,16 @@ jobs:
         
     - name: Install Playwright browsers
       run: |
-        playwright install --with-deps
+        playwright install --with-deps ${{ matrix.browser }}
         
     - name: Run Playwright tests
       env:
         HEADLESS: true
-        BASE_URL: https://sapindaceous-chagrinedly-camilla.ngrok-free.dev
+        BROWSER: ${{ matrix.browser }}
+        SCREEN_WIDTH: ${{ matrix.resolution.width }}
+        SCREEN_HEIGHT: ${{ matrix.resolution.height }}
+        APP_URL: http://NGROK_URL:3000
+        TEST_NAME: ${{ matrix.browser }}-${{ matrix.resolution.name }}
       run: |
-        pytest test/ -v
+        pytest tests/ -v --tb=short
+        
