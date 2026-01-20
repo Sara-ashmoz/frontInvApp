@@ -8,7 +8,7 @@ import unittest
 import os
 from playwright.sync_api import sync_playwright
 
-from login_page import LoginPage
+from test.login_page import LoginPage
 
 
 class TestInvParserUI(unittest.TestCase):
@@ -25,7 +25,7 @@ class TestInvParserUI(unittest.TestCase):
         else:
             cls.browser = cls.playwright.chromium.launch(headless=False)
         
-        cls.base_url = "https://yolande-phalangeal-kristan.ngrok-free.dev"
+        cls.base_url = "http://localhost:3000"
     
     @classmethod
     def tearDownClass(cls):

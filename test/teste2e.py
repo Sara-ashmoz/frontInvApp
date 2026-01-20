@@ -21,11 +21,11 @@ import os
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
 
 # Import page objects
-from login_page import LoginPage
-from dashboard_page import DashboardPage
-from upload_page import UploadPage
-from invoice_page import InvoicePage
-from invoices_page import InvoicesPage
+from test.login_page import LoginPage
+from test.dashboard_page import DashboardPage
+from test.upload_page import UploadPage
+from test.invoice_page import InvoicePage
+from test.invoices_page import InvoicesPage
 
 
 class TestUserJourney(unittest.TestCase):
@@ -45,7 +45,7 @@ class TestUserJourney(unittest.TestCase):
         else:
             cls.browser = cls.playwright.chromium.launch(headless=True)
         
-        cls.base_url = "https://yolande-phalangeal-kristan.ngrok-free.dev"
+        cls.base_url = "http://localhost:3000"
         cls.sample_invoice_path = os.path.join(os.path.dirname(__file__), "fixtures", "sample.pdf")
 
     @classmethod

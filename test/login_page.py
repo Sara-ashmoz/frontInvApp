@@ -1,7 +1,7 @@
 """Login Page Object."""
 
 from playwright.sync_api import Page
-from base_page import BasePage
+from .base_page import BasePage
 
 
 class LoginPage(BasePage):

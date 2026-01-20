@@ -1,8 +1,8 @@
 """Invoice Detail Page Object."""
 
 from playwright.sync_api import Page
-from base_page import BasePage
-from navigation_component import NavigationComponent
+from .base_page import BasePage
+from .navigation_component import NavigationComponent
 
 
 class InvoicePage(BasePage):

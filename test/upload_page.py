@@ -1,17 +1,8 @@
 """Upload Page Object."""
 
-import playwright
 from playwright.sync_api import Page
-from base_page import BasePage
-from navigation_component import NavigationComponent
-
-
-from playwright.sync_api import sync_playwright
-import os
-
-headless = os.getenv('HEADLESS', 'false').lower() == 'true'
-browser = playwright.chromium.launch(headless=headless)
-page = browser.new_page()
+from .base_page import BasePage
+from .navigation_component import NavigationComponent
 
 
 class UploadPage(BasePage):
