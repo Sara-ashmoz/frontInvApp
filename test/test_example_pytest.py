@@ -131,6 +131,7 @@ def test_navigation_to_invoices(page, base_url):
     assert isinstance(invoices_page, InvoicesPage)
 
 
+
 def test_responsive_layout(page, base_url, browser_config):
     """Test that page adapts to different screen sizes."""
     # This test automatically runs on different resolutions via the matrix
