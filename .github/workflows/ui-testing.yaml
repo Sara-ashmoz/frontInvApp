@@ -18,7 +18,7 @@ jobs:
     
     strategy:
       matrix:
-        browser: [chrome, firefox]
+        browser: [chromium, firefox]
         resolution: 
           - { name: 'desktop', width: 1920, height: 1080 }
           - { name: 'tablet', width: 768, height: 1024 }
@@ -44,17 +44,9 @@ jobs:
         
     - name: Install Playwright browsers
       run: |
-        playwright install --with-deps ${{ matrix.browser }}
+        python -m playwright install --with-deps ${{ matrix.browser }}
         
-    - name: Start Next.js app
-      working-directory: ./frontend
-      run: |
-        npm install
-        npm run build
-        npm run start &
-        sleep 10
-      
-    - name: Run Playwright tests
+    - name: Run Playwright tests (no app needed - just config tests)
       env:
         HEADLESS: true
         BROWSER: ${{ matrix.browser }}
@@ -64,4 +56,4 @@ jobs:
         TEST_NAME: ${{ matrix.browser }}-${{ matrix.resolution.name }}
       run: |
         cd test
-        pytest test_matrix_config.py -v --tb=short
+        python -m pytest test_matrix_config.py -v --tb=short
