@@ -10,7 +10,7 @@ def test_browser_config(browser_config):
     print(f"✅ Headless: {browser_config['headless']}")
     print(f"✅ Base URL: {browser_config['base_url']}")
     
-    assert browser_config['browser_name'] in ['chrome', 'firefox', 'webkit']
+    assert browser_config['browser_name'] in ['chrome', 'chromium', 'firefox', 'webkit']
     assert browser_config['screen_width'] > 0
     assert browser_config['screen_height'] > 0
 
