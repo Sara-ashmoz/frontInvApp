@@ -6,6 +6,7 @@ on:
     branches:
       - main
       - master
+      - playwrightCI
   pull_request:
     branches:
       - main
