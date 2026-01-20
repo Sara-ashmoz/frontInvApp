@@ -51,5 +51,5 @@ jobs:
         APP_URL: http://NGROK_URL:3000
         TEST_NAME: ${{ matrix.browser }}-${{ matrix.resolution.name }}
       run: |
-        pytest tests/ -v --tb=short
+        pytest test/ -v --tb=short
         
