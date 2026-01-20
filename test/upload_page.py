@@ -67,7 +67,7 @@ class UploadPage(BasePage):
         Returns:
             InvoicePage or UploadPage depending on outcome
         """
-        from invoice_page import InvoicePage
+        from .invoice_page import InvoicePage
         
         self.select_file(file_path)
         self.page.locator(self.UPLOAD_BUTTON).click()

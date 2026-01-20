@@ -45,7 +45,7 @@ class TestUserJourney(unittest.TestCase):
         else:
             cls.browser = cls.playwright.chromium.launch(headless=True)
         
-        cls.base_url = "http://localhost:3000"
+        cls.base_url = "https://yolande-phalangeal-kristan.ngrok-free.dev"
         cls.sample_invoice_path = os.path.join(os.path.dirname(__file__), "fixtures", "sample.pdf")
 
     @classmethod

@@ -17,7 +17,7 @@ from test.upload_page import UploadPage
 from test.invoice_page import InvoicePage
 
 
-BASE_URL = os.environ.get("BASE_URL", "http://localhost:3000")
+BASE_URL = os.environ.get("BASE_URL", "https://yolande-phalangeal-kristan.ngrok-free.dev")
 FIXTURES = Path(__file__).parent / "fixtures"
 FIXTURES.mkdir(exist_ok=True)
 SHOW_UI = bool(os.environ.get("SHOW_UI", ""))
@@ -63,9 +63,9 @@ class TestUploadFunctionality(unittest.TestCase):
         cls.playwright = sync_playwright().start()
         
         if SHOW_UI:
-            cls.browser = cls.playwright.chromium.launch(headless=False, slow_mo=250)
+            cls.browser = cls.playwright.BrowserFactory.get_page().launch(headless=True, slow_mo=250)
         else:
-            cls.browser = cls.playwright.chromium.launch(headless=True)
+            cls.browser = cls.playwright.BrowserFactory.get_page().launch(headless=True)
         
         # Create context that ignores HTTPS errors for ngrok
         cls.context = cls.browser.new_context(ignore_https_errors=True)

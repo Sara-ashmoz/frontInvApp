@@ -21,11 +21,11 @@ class TestInvParserUI(unittest.TestCase):
         
         show_ui = os.environ.get("SHOW_UI", "0") == "1"
         if show_ui:
-            cls.browser = cls.playwright.chromium.launch(headless=False, slow_mo=500)
+            cls.browser = cls.playwright.BrowserFactory.get_page().launch(headless=True, slow_mo=500)
         else:
-            cls.browser = cls.playwright.chromium.launch(headless=False)
+            cls.browser = cls.playwright.BrowserFactory.get_page().launch(headless=True)
         
-        cls.base_url = "http://localhost:3000"
+        cls.base_url = "https://yolande-phalangeal-kristan.ngrok-free.dev"
     
     @classmethod
     def tearDownClass(cls):
